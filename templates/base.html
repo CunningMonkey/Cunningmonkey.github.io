@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Config.Title}} - {{.Post.Title}}</title>
+    <!-- 添加CSS支持 -->
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">{{.Config.Title}}</a></h1>
+            <p>{{.Config.Description}}</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <article class="article-content">
+            <h1>{{.Post.Title}}</h1>
+            <time>{{.Post.Date.Format "2006年1月2日"}}</time>
+            <div>{{.Post.Content}}</div>
+        </article>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© {{ (now).Year }} {{.Config.Title}}</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为所有代码块添加复制按钮和语言标签
+            const codeBlocks = document.querySelectorAll('pre code');
+            
+            codeBlocks.forEach(function(codeBlock) {
+                const pre = codeBlock.parentElement;
+                
+                // 尝试从多种方式提取语言信息
+                let language = 'code';
+                
+                // 方法1: 从 code 元素的类名中提取
+                const codeClassList = codeBlock.classList;
+                for (let className of codeClassList) {
+                    if (className.startsWith('language-')) {
+                        language = className.replace('language-', '');
+                        break;
+                    } else if (className.startsWith('hljs-')) {
+                        // 有时候 highlight.js 会添加 hljs- 前缀
+                        continue;
+                    }
+                }
+                
+                // 方法2: 从 pre 元素的类名中提取
+                if (language === 'code') {
+                    const preClassList = pre.classList;
+                    for (let className of preClassList) {
+                        if (className.startsWith('language-')) {
+                            language = className.replace('language-', '');
+                            break;
+                        }
+                    }
+                }
+                
+                // 方法3: 检查代码内容来推断语言（简单的启发式方法）
+                if (language === 'code') {
+                    const code = codeBlock.textContent;
+                    if (code.includes('package main') || code.includes('func main()') || code.includes('import (')) {
+                        language = 'go';
+                    } else if (code.includes('function') || code.includes('const ') || code.includes('let ')) {
+                        language = 'javascript';
+                    } else if (code.includes('def ') || code.includes('import ')) {
+                        language = 'python';
+                    }
+                }
+                
+                // 语言名称美化
+                const languageMap = {
+                    'go': 'Go',
+                    'golang': 'Go',
+                    'js': 'JavaScript',
+                    'javascript': 'JavaScript',
+                    'ts': 'TypeScript',
+                    'typescript': 'TypeScript',
+                    'py': 'Python',
+                    'python': 'Python',
+                    'java': 'Java',
+                    'cpp': 'C++',
+                    'c': 'C',
+                    'html': 'HTML',
+                    'css': 'CSS',
+                    'json': 'JSON',
+                    'xml': 'XML',
+                    'yaml': 'YAML',
+                    'yml': 'YAML',
+                    'md': 'Markdown',
+                    'markdown': 'Markdown',
+                    'sh': 'Shell',
+                    'bash': 'Bash',
+                    'sql': 'SQL'
+                };
+                
+                const displayLanguage = languageMap[language.toLowerCase()] || language.toUpperCase();
+                
+                // 设置语言标签
+                pre.setAttribute('data-lang', displayLanguage);
+                
+                // 创建复制按钮
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = '复制';
+                copyBtn.onclick = function() {
+                    navigator.clipboard.writeText(codeBlock.textContent).then(function() {
+                        copyBtn.textContent = '已复制';
+                        copyBtn.classList.add('copied');
+                        setTimeout(function() {
+                            copyBtn.textContent = '复制';
+                            copyBtn.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function(err) {
+                        console.error('复制失败:', err);
+                        copyBtn.textContent = '复制失败';
+                        setTimeout(function() {
+                            copyBtn.textContent = '复制';
+                        }, 2000);
+                    });
+                };
+                
+                pre.appendChild(copyBtn);
+            });
+        });
+    </script>
+</body>
+</html>
