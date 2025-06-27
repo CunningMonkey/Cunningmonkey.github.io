@@ -33,21 +33,81 @@ type Post struct {
 type Config struct {
 	Title       string
 	Description string
+	About       AboutInfo
+}
+
+type AboutInfo struct {
+	Content template.HTML
 }
 
 func main() {
-	config := Config{
-		Title:       "my simple blog",
-		Description: "welcome to my simple blog",
-	}
+	config := loadConfig()
 
 	os.RemoveAll("public")
 	os.MkdirAll("public", 0755)
 
 	posts := processPosts(config)
 	generateListPage(config, posts)
+	generateAboutPage(config)
 	copyStaticFiles()
 	fmt.Println("blog generated! output directory: public")
+}
+
+func loadConfig() Config {
+	// 默认配置
+	defaultConfig := Config{
+		Title:       "my simple blog",
+		Description: "welcome to my simple blog",
+		About: AboutInfo{
+			Content: template.HTML(`
+				<p>你好！欢迎来到我的博客。</p>
+				<p>我是一名热爱技术的开发者，喜欢分享我的学习和经验。</p>
+				<p>这个博客是用Go语言构建的静态博客生成器，支持Markdown格式的文章。</p>
+				<p>如果你有任何问题或建议，欢迎与我交流！</p>
+			`),
+		},
+	}
+
+	// 尝试读取配置文件
+	data, err := os.ReadFile("config.yaml")
+	if err != nil {
+		fmt.Printf("配置文件 config.yaml 不存在，使用默认配置\n")
+		return defaultConfig
+	}
+
+	var configData struct {
+		Title       string `yaml:"title"`
+		Description string `yaml:"description"`
+		About       struct {
+			Content string `yaml:"content"`
+		} `yaml:"about"`
+	}
+
+	if err := yaml.Unmarshal(data, &configData); err != nil {
+		fmt.Printf("解析配置文件失败: %v，使用默认配置\n", err)
+		return defaultConfig
+	}
+
+	config := Config{
+		Title:       configData.Title,
+		Description: configData.Description,
+		About: AboutInfo{
+			Content: template.HTML(configData.About.Content),
+		},
+	}
+
+	// 如果配置文件中的字段为空，使用默认值
+	if config.Title == "" {
+		config.Title = defaultConfig.Title
+	}
+	if config.Description == "" {
+		config.Description = defaultConfig.Description
+	}
+	if config.About.Content == "" {
+		config.About.Content = defaultConfig.About.Content
+	}
+
+	return config
 }
 
 func processPosts(config Config) []Post {
@@ -177,6 +237,76 @@ func generateListPage(config Config, posts []Post) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func generateAboutPage(config Config) {
+	// 首先尝试从Markdown文件读取关于页面内容
+	aboutContent, err := processAboutPage()
+	if err != nil {
+		log.Printf("处理关于页面失败: %v，使用默认内容", err)
+		// 使用默认内容
+		aboutContent = config.About.Content
+	}
+
+	tmpl, err := createTemplate("templates/about.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	f, err := os.Create("public/about.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	err = tmpl.Execute(f, struct {
+		Config
+		About AboutInfo
+	}{
+		Config: config,
+		About:  AboutInfo{Content: aboutContent},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func processAboutPage() (template.HTML, error) {
+	aboutPath := filepath.Join("pages", "about.md")
+
+	data, err := os.ReadFile(aboutPath)
+	if err != nil {
+		return "", fmt.Errorf("无法读取关于页面文件: %v", err)
+	}
+
+	// 解析Front Matter和内容
+	parts := bytes.SplitN(data, []byte("---"), 3)
+	if len(parts) < 3 {
+		return "", fmt.Errorf("关于页面文件格式无效")
+	}
+
+	// 转换Markdown内容为HTML
+	var buf bytes.Buffer
+	md := goldmark.New(
+		goldmark.WithParserOptions(parser.WithAutoHeadingID()),
+		goldmark.WithExtensions(
+			extension.GFM,
+			extension.DefinitionList,
+			highlighting.NewHighlighting(
+				highlighting.WithStyle("monokai"),
+			),
+		),
+		goldmark.WithRendererOptions(
+			html.WithHardWraps(),
+			html.WithXHTML(),
+		),
+	)
+
+	if err := md.Convert(parts[2], &buf); err != nil {
+		return "", fmt.Errorf("转换Markdown失败: %v", err)
+	}
+
+	return template.HTML(buf.String()), nil
 }
 
 func copyStaticFiles() {

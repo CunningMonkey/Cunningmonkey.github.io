@@ -1,0 +1,14 @@
+title: "my simple blog"
+description: "welcome to my simple blog"
+about:
+  content: |
+    <p>你好！欢迎来到我的博客。</p>
+    <p>我是一名热爱技术的开发者，喜欢分享我的学习和经验。</p>
+    <p>这个博客是用Go语言构建的静态博客生成器，支持Markdown格式的文章。</p>
+    <p>如果你有任何问题或建议，欢迎与我交流！</p>
+    <p>你可以通过以下方式联系我：</p>
+    <ul>
+      <li>邮箱：your-email@example.com</li>
+      <li>GitHub：<a href="https://github.com/yourusername">@yourusername</a></li>
+      <li>Twitter：<a href="https://twitter.com/yourusername">@yourusername</a></li>
+    </ul> 

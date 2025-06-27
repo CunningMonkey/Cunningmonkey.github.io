@@ -52,6 +52,48 @@ header p {
     font-weight: 400;
 }
 
+/* 导航样式 */
+nav {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 0.2rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    position: relative;
+}
+
+nav a:hover {
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb;
+    background: none;
+    text-decoration: none;
+}
+
+nav a.active {
+    color: #1d4ed8;
+    border-bottom: 2px solid #1d4ed8;
+    background: none;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+nav a.active:hover {
+    color: #1e40af;
+    border-bottom: 2px solid #1e40af;
+    text-decoration: none;
+}
+
 /* 文章列表样式 */
 section {
     background: white;
@@ -366,4 +408,75 @@ footer {
     article {
         padding: 1.5rem;
     }
+}
+
+/* 关于页面样式 */
+.about-content {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 3rem;
+    margin-bottom: 2rem;
+}
+
+.about-info {
+    color: #2d3748;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.about-info h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    border-bottom: 3px solid #e2e8f0;
+    padding-bottom: 1rem;
+}
+
+.about-info h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e1e8ed;
+}
+
+.about-info h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 1.5rem 0 0.75rem;
+}
+
+.about-info p {
+    margin-bottom: 1.5rem;
+}
+
+.about-info ul, .about-info ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.about-info li {
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+}
+
+.about-info strong {
+    color: #1a202c;
+    font-weight: 600;
+}
+
+.about-info a {
+    color: #3182ce;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.about-info a:hover {
+    border-bottom-color: #3182ce;
 }
