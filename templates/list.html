@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Config.Title}}</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">{{.Config.Title}}</a></h1>
+            <p>{{.Config.Description}}</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section>
+            {{range .Posts}}
+            <article>
+                <h2><a href="{{.Slug}}.html">{{.Title}}</a></h2>
+                <time>{{.Date.Format "2006年1月2日"}}</time>
+                <p>{{.Summary}}</p>
+            </article>
+            {{end}}
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© {{ (now).Year }} {{.Config.Title}}</p>
+        </div>
+    </footer>
+</body>
+</html>
