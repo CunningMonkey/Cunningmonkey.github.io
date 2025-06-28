@@ -49,8 +49,8 @@ if [ $? -eq 0 ]; then
     echo ""
     echo "📋 接下来："
     echo "1. GitHub Actions会自动构建和部署你的博客"
-    echo "2. 访问 https://github.com/CunningMonkey/blog_source/actions 查看部署进度"
-    echo "3. 部署完成后访问 https://cunningmonkey.github.io/blog_source/"
+    echo "2. 访问 https://github.com/CunningMonkey/CunningMonkey.github.io/actions 查看部署进度"
+    echo "3. 部署完成后访问 https://cunningmonkey.github.io/"
     echo ""
     echo "⏳ 部署通常需要2-5分钟完成"
 else
