@@ -113,16 +113,20 @@ header p {
     box-shadow: 0 2px 8px var(--shadow);
 }
 
-.theme-toggle:hover {
-    background: var(--bg-code);
-    border-color: var(--link-color);
-    transform: translateY(-2px) rotate(20deg) scale(1.05);
-    box-shadow: 0 6px 16px var(--shadow-hover);
+/* 只在非触摸设备上启用 hover 效果 */
+@media (hover: hover) and (pointer: fine) {
+    .theme-toggle:hover {
+        background: var(--bg-code);
+        border-color: var(--link-color);
+        transform: translateY(-2px) rotate(20deg) scale(1.05);
+        box-shadow: 0 6px 16px var(--shadow-hover);
+    }
 }
 
 .theme-toggle:active {
     transform: translateY(0) scale(0.98);
     box-shadow: 0 2px 6px var(--shadow);
+    transition: all 0.1s ease;
 }
 
 .theme-toggle .sun-icon {
