@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈吉飞东西🫘 - 写些什么</title>
+    
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div>
+                    <h1><a href="index.html">哈吉飞东西🫘</a></h1>
+                    <p>welcome to my life</p>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="about.html">关于我</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <article class="article-content">
+            <h1>写些什么</h1>
+            <time>2025年1月1日</time>
+            <div><h2 id="2025-12-06">2025-12-06</h2>
+<p>现在是凌晨1点，准备做一些线上操作....</p>
+<p>播放了大同的《没啥好说》，听的我好想哭</p>
+<p>好想能去听一次你的演唱会啊，Khalil</p>
+<h2 id="2025-12-05">2025-12-05</h2>
+<p>7月份mentor转岗后，上月底技术负责人也转岗了。被值班、上线、开发压的有点喘不过气了。</p>
+<p>最近熬夜好多，身体也不太舒服，上个月去医院检查，有不正常的指标，还要再复查，本来安排的健身计划也只能暂停了:)。</p>
+<p>life可真是xx的struggle啊！</p>
+<h2 id="2025-11-20">2025-11-20</h2>
+<p>大同首专发布20周年，最近也在尝试练习弹唱大同的歌，但是都好难 :)</p>
+<p>总感觉大同去世这件事像是梦一样，一直以来都很欣赏这种很纯粹的人，自己也一直想成为但永远无法成为这种纯粹的人</p>
+<p>希望你真的去了另一个世界，并且能够开心</p>
+</div>
+        </article>
+
+        
+        <div class="comments-section">
+            <h2>评论</h2>
+            <div id="giscus-container"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 哈吉飞东西🫘</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        (function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            
+            
+            function loadGiscus(theme) {
+                const container = document.getElementById('giscus-container');
+                if (!container) return;
+                
+                
+                container.innerHTML = '';
+                
+                
+                const script = document.createElement('script');
+                script.src = 'https://giscus.app/client.js';
+                script.setAttribute('data-repo', 'CunningMonkey/CunningMonkey.github.io');
+                script.setAttribute('data-repo-id', 'R_kgDOPCWLRg');
+                script.setAttribute('data-category', 'Announcements');
+                script.setAttribute('data-category-id', 'DIC_kwDOPCWLRs4CzbpT');
+                script.setAttribute('data-mapping', 'pathname');
+                script.setAttribute('data-strict', '0');
+                script.setAttribute('data-reactions-enabled', '1');
+                script.setAttribute('data-emit-metadata', '0');
+                script.setAttribute('data-input-position', 'bottom');
+                script.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
+                script.setAttribute('data-lang', 'zh-CN');
+                script.setAttribute('crossorigin', 'anonymous');
+                script.async = true;
+                
+                container.appendChild(script);
+            }
+            
+            
+            loadGiscus(savedTheme);
+            
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                
+                loadGiscus(newTheme);
+            });
+        })();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const codeBlocks = document.querySelectorAll('pre code');
+
+            codeBlocks.forEach(function (codeBlock) {
+                const pre = codeBlock.parentElement;
+
+                
+                let language = 'code';
+
+                
+                const codeClassList = codeBlock.classList;
+                for (let className of codeClassList) {
+                    if (className.startsWith('language-')) {
+                        language = className.replace('language-', '');
+                        break;
+                    } else if (className.startsWith('hljs-')) {
+                        
+                        continue;
+                    }
+                }
+
+                
+                if (language === 'code') {
+                    const preClassList = pre.classList;
+                    for (let className of preClassList) {
+                        if (className.startsWith('language-')) {
+                            language = className.replace('language-', '');
+                            break;
+                        }
+                    }
+                }
+
+                
+                if (language === 'code') {
+                    const code = codeBlock.textContent;
+                    if (code.includes('package main') || code.includes('func main()') || code.includes('import (')) {
+                        language = 'go';
+                    } else if (code.includes('function') || code.includes('const ') || code.includes('let ')) {
+                        language = 'javascript';
+                    } else if (code.includes('def ') || code.includes('import ')) {
+                        language = 'python';
+                    }
+                }
+
+                
+                const languageMap = {
+                    'go': 'Go',
+                    'golang': 'Go',
+                    'js': 'JavaScript',
+                    'javascript': 'JavaScript',
+                    'ts': 'TypeScript',
+                    'typescript': 'TypeScript',
+                    'py': 'Python',
+                    'python': 'Python',
+                    'java': 'Java',
+                    'cpp': 'C++',
+                    'c': 'C',
+                    'html': 'HTML',
+                    'css': 'CSS',
+                    'json': 'JSON',
+                    'xml': 'XML',
+                    'yaml': 'YAML',
+                    'yml': 'YAML',
+                    'md': 'Markdown',
+                    'markdown': 'Markdown',
+                    'sh': 'Shell',
+                    'bash': 'Bash',
+                    'sql': 'SQL'
+                };
+
+                const displayLanguage = languageMap[language.toLowerCase()] || language.toUpperCase();
+
+                
+                pre.setAttribute('data-lang', displayLanguage);
+
+                
+                const copyBtn = document.createElement('button');
+                copyBtn.className = 'copy-btn';
+                copyBtn.textContent = '复制';
+                copyBtn.onclick = function () {
+                    navigator.clipboard.writeText(codeBlock.textContent).then(function () {
+                        copyBtn.textContent = '已复制';
+                        copyBtn.classList.add('copied');
+                        setTimeout(function () {
+                            copyBtn.textContent = '复制';
+                            copyBtn.classList.remove('copied');
+                        }, 2000);
+                    }).catch(function (err) {
+                        console.error('复制失败:', err);
+                        copyBtn.textContent = '复制失败';
+                        setTimeout(function () {
+                            copyBtn.textContent = '复制';
+                        }, 2000);
+                    });
+                };
+
+                pre.appendChild(copyBtn);
+            });
+        });
+    </script>
+</body>
+
+</html>
