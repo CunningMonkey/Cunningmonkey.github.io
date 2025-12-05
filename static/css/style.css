@@ -39,7 +39,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "微软雅黑", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.7;
     color: var(--text-primary);
     background-color: var(--bg-primary);
@@ -73,9 +73,11 @@ header {
 
 header h1 {
     font-size: 2.5rem;
-    font-weight: 300;
+    font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", sans-serif;
 }
 
 header h1 a {
@@ -98,26 +100,29 @@ header p {
 .theme-toggle {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    width: 40px;
-    height: 40px;
+    border-radius: 10px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
     color: var(--text-primary);
+    box-shadow: 0 2px 8px var(--shadow);
 }
 
 .theme-toggle:hover {
-    background: var(--bg-primary);
+    background: var(--bg-code);
     border-color: var(--link-color);
-    transform: rotate(20deg);
+    transform: translateY(-2px) rotate(20deg) scale(1.05);
+    box-shadow: 0 6px 16px var(--shadow-hover);
 }
 
 .theme-toggle:active {
-    transform: scale(0.95);
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 6px var(--shadow);
 }
 
 .theme-toggle .sun-icon {
@@ -176,6 +181,97 @@ nav a.active:hover {
     color: var(--link-hover);
     border-bottom: 2px solid var(--link-hover);
     text-decoration: none;
+}
+
+/* 文章列表头部 */
+.posts-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+/* 文章排序控件样式 */
+.sort-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.sort-toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.6s ease;
+}
+
+.sort-toggle-btn:hover::before {
+    left: 100%;
+}
+
+.sort-toggle-btn:hover {
+    background: var(--bg-code);
+    border-color: var(--link-color);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px var(--shadow-hover);
+}
+
+.sort-toggle-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 6px var(--shadow);
+}
+
+.sort-toggle-btn .sort-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 默认显示向下箭头（降序） */
+.sort-toggle-btn .arrow-up {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sort-toggle-btn .arrow-down {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 升序状态显示向上箭头 */
+.sort-toggle-btn.asc .arrow-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sort-toggle-btn.asc .arrow-down {
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+.sort-toggle-btn:hover .sort-icon {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.sort-toggle-btn.asc:hover .sort-icon {
+    transform: rotate(-5deg) scale(1.1);
 }
 
 /* 文章列表样式 */
@@ -500,9 +596,25 @@ footer {
         font-size: 1.75rem;
     }
     
-    .theme-toggle {
-        width: 36px;
-        height: 36px;
+    header h1 {
+        font-size: 1.85rem;
+    }
+    
+    .posts-header {
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    .theme-toggle,
+    .sort-toggle-btn {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .theme-toggle svg,
+    .sort-toggle-btn .sort-icon {
+        width: 18px;
+        height: 18px;
     }
     
     .article-content {

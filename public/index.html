@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my simple blog</title>
+    <title>哈吉飞东西🫘</title>
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
@@ -11,8 +11,8 @@
         <div class="container">
             <div class="header-top">
                 <div>
-                    <h1><a href="index.html">my simple blog</a></h1>
-                    <p>welcome to my simple blog</p>
+                    <h1><a href="index.html">哈吉飞东西🫘</a></h1>
+                    <p>welcome to my life</p>
                 </div>
                 <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
                     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -39,30 +39,47 @@
     </header>
     
     <div class="container">
-        <section>
+        <div class="posts-header">
+            <button id="sort-toggle" class="sort-toggle-btn" data-order="desc" aria-label="切换排序方式" title="最新在前">
+                <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 5h10"/>
+                    <path d="M11 9h7"/>
+                    <path d="M11 13h4"/>
+                    <circle cx="3" cy="5" r="1"/>
+                    <circle cx="3" cy="9" r="1"/>
+                    <circle cx="3" cy="13" r="1"/>
+                    <path class="arrow-down" d="M17 17l3 3 3-3"/>
+                    <path class="arrow-down" d="M20 20V10"/>
+                    <path class="arrow-up" d="M17 7l3-3 3 3"/>
+                    <path class="arrow-up" d="M20 4v10"/>
+                </svg>
+            </button>
+        </div>
+        
+        <section id="posts-container">
             
-            <article>
-                <h2><a href="post1.html">我的第一篇文章</a></h2>
-                <time>2023年10月1日</time>
-                <p>这是文章的摘要</p>
-            </article>
-            
-            <article>
-                <h2><a href="post2.html">如何添加新文章到博客</a></h2>
-                <time>2024年1月15日</time>
+            <article data-date="2025-12-05">
+                <h2><a href="post5.html">碎碎念</a></h2>
+                <time>2025年12月5日</time>
                 <p>学习如何向你的静态博客添加新文章并自动部署</p>
             </article>
             
-            <article>
+            <article data-date="2024-01-15">
                 <h2><a href="post3.html">如何添加新文章到博客</a></h2>
                 <time>2024年1月15日</time>
                 <p>学习如何向你的静态博客添加新文章并自动部署</p>
             </article>
             
-            <article>
+            <article data-date="2024-01-15">
                 <h2><a href="post4.html">hhhhhh</a></h2>
                 <time>2024年1月15日</time>
                 <p>学习如何向你的静态博客添加新文章并自动部署</p>
+            </article>
+            
+            <article data-date="2023-10-01">
+                <h2><a href="post1.html">我的第一篇文章</a></h2>
+                <time>2023年10月1日</time>
+                <p>这是文章的摘要</p>
             </article>
             
         </section>
@@ -70,7 +87,7 @@
     
     <footer>
         <div class="container">
-            <p>© 2025 my simple blog</p>
+            <p>© 2025 哈吉飞东西🫘</p>
         </div>
     </footer>
 
@@ -91,6 +108,72 @@
                 
                 html.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
+            });
+        })();
+
+        
+        (function() {
+            const postsContainer = document.getElementById('posts-container');
+            const sortToggleBtn = document.getElementById('sort-toggle');
+            
+            
+            let currentOrder = localStorage.getItem('postSortOrder') || 'desc';
+            
+            
+            function updateButtonState(order) {
+                sortToggleBtn.setAttribute('data-order', order);
+                if (order === 'desc') {
+                    sortToggleBtn.setAttribute('title', '最新在前 - 点击切换');
+                    sortToggleBtn.classList.remove('asc');
+                } else {
+                    sortToggleBtn.setAttribute('title', '最旧在前 - 点击切换');
+                    sortToggleBtn.classList.add('asc');
+                }
+            }
+            
+            
+            function sortPosts(order) {
+                const articles = Array.from(postsContainer.querySelectorAll('article'));
+                
+                articles.sort(function(a, b) {
+                    const dateA = new Date(a.getAttribute('data-date'));
+                    const dateB = new Date(b.getAttribute('data-date'));
+                    
+                    if (order === 'desc') {
+                        return dateB - dateA; 
+                    } else {
+                        return dateA - dateB; 
+                    }
+                });
+                
+                
+                postsContainer.innerHTML = '';
+                
+                
+                articles.forEach(function(article) {
+                    postsContainer.appendChild(article);
+                });
+            }
+            
+            
+            updateButtonState(currentOrder);
+            if (currentOrder === 'asc') {
+                sortPosts('asc');
+            }
+            
+            
+            sortToggleBtn.addEventListener('click', function() {
+                
+                currentOrder = currentOrder === 'desc' ? 'asc' : 'desc';
+                
+                
+                updateButtonState(currentOrder);
+                
+                
+                sortPosts(currentOrder);
+                
+                
+                localStorage.setItem('postSortOrder', currentOrder);
             });
         })();
     </script>

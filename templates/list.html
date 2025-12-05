@@ -39,9 +39,26 @@
     </header>
     
     <div class="container">
-        <section>
+        <div class="posts-header">
+            <button id="sort-toggle" class="sort-toggle-btn" data-order="desc" aria-label="切换排序方式" title="最新在前">
+                <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 5h10"/>
+                    <path d="M11 9h7"/>
+                    <path d="M11 13h4"/>
+                    <circle cx="3" cy="5" r="1"/>
+                    <circle cx="3" cy="9" r="1"/>
+                    <circle cx="3" cy="13" r="1"/>
+                    <path class="arrow-down" d="M17 17l3 3 3-3"/>
+                    <path class="arrow-down" d="M20 20V10"/>
+                    <path class="arrow-up" d="M17 7l3-3 3 3"/>
+                    <path class="arrow-up" d="M20 4v10"/>
+                </svg>
+            </button>
+        </div>
+        
+        <section id="posts-container">
             {{range .Posts}}
-            <article>
+            <article data-date="{{.Date.Format "2006-01-02"}}">
                 <h2><a href="{{.Slug}}.html">{{.Title}}</a></h2>
                 <time>{{.Date.Format "2006年1月2日"}}</time>
                 <p>{{.Summary}}</p>
@@ -73,6 +90,72 @@
                 
                 html.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
+            });
+        })();
+
+        // 文章排序功能
+        (function() {
+            const postsContainer = document.getElementById('posts-container');
+            const sortToggleBtn = document.getElementById('sort-toggle');
+            
+            // 从 localStorage 读取排序设置，默认为降序（最新在前）
+            let currentOrder = localStorage.getItem('postSortOrder') || 'desc';
+            
+            // 更新按钮状态
+            function updateButtonState(order) {
+                sortToggleBtn.setAttribute('data-order', order);
+                if (order === 'desc') {
+                    sortToggleBtn.setAttribute('title', '最新在前 - 点击切换');
+                    sortToggleBtn.classList.remove('asc');
+                } else {
+                    sortToggleBtn.setAttribute('title', '最旧在前 - 点击切换');
+                    sortToggleBtn.classList.add('asc');
+                }
+            }
+            
+            // 排序函数
+            function sortPosts(order) {
+                const articles = Array.from(postsContainer.querySelectorAll('article'));
+                
+                articles.sort(function(a, b) {
+                    const dateA = new Date(a.getAttribute('data-date'));
+                    const dateB = new Date(b.getAttribute('data-date'));
+                    
+                    if (order === 'desc') {
+                        return dateB - dateA; // 降序：最新在前
+                    } else {
+                        return dateA - dateB; // 升序：最旧在前
+                    }
+                });
+                
+                // 清空容器
+                postsContainer.innerHTML = '';
+                
+                // 按新顺序添加文章
+                articles.forEach(function(article) {
+                    postsContainer.appendChild(article);
+                });
+            }
+            
+            // 应用保存的排序
+            updateButtonState(currentOrder);
+            if (currentOrder === 'asc') {
+                sortPosts('asc');
+            }
+            
+            // 切换按钮点击事件
+            sortToggleBtn.addEventListener('click', function() {
+                // 切换排序顺序
+                currentOrder = currentOrder === 'desc' ? 'asc' : 'desc';
+                
+                // 更新按钮状态
+                updateButtonState(currentOrder);
+                
+                // 排序文章
+                sortPosts(currentOrder);
+                
+                // 保存到 localStorage
+                localStorage.setItem('postSortOrder', currentOrder);
             });
         })();
     </script>

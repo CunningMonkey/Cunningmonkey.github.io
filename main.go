@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"time"
 
@@ -137,6 +138,12 @@ func processPosts(config Config) []Post {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// 默认按日期降序排序（最新的在前面）
+	sort.Slice(posts, func(i, j int) bool {
+		return posts[i].Date.After(posts[j].Date)
+	})
+
 	return posts
 }
 
