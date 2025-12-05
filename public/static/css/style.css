@@ -194,85 +194,51 @@ nav a.active:hover {
 .sort-toggle-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    background: var(--bg-secondary);
+    gap: 8px;
+    height: 36px;
+    padding: 0 16px;
+    background-color: transparent;
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    color: var(--text-primary);
+    border-radius: 999px;
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 8px var(--shadow);
-    position: relative;
-    overflow: hidden;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .sort-toggle-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-    transition: left 0.6s ease;
-}
-
-.sort-toggle-btn:hover::before {
-    left: 100%;
+    display: none;
 }
 
 .sort-toggle-btn:hover {
-    background: var(--bg-code);
-    border-color: var(--link-color);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 16px var(--shadow-hover);
+    background-color: var(--bg-code);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px var(--shadow);
 }
 
 .sort-toggle-btn:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 2px 6px var(--shadow);
+    transform: translateY(0);
 }
 
 .sort-toggle-btn .sort-icon {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
 }
 
-/* 默认显示向下箭头（降序） */
-.sort-toggle-btn .arrow-up {
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+/* 默认状态（降序） - 图标向下 */
+.sort-toggle-btn .sort-icon {
+    transform: rotate(-90deg);
 }
 
-.sort-toggle-btn .arrow-down {
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+/* 升序状态 - 图标向上 */
+.sort-toggle-btn.asc .sort-icon {
+    transform: rotate(90deg);
 }
 
-/* 升序状态显示向上箭头 */
-.sort-toggle-btn.asc .arrow-up {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.sort-toggle-btn.asc .arrow-down {
-    opacity: 0;
-    transform: translateY(6px);
-}
-
-.sort-toggle-btn:hover .sort-icon {
-    transform: rotate(5deg) scale(1.1);
-}
-
-.sort-toggle-btn.asc:hover .sort-icon {
-    transform: rotate(-5deg) scale(1.1);
-}
 
 /* 文章列表样式 */
 section {
@@ -382,7 +348,8 @@ article p {
     margin-bottom: 1.5rem;
 }
 
-.article-content ul, .article-content ol {
+.article-content ul,
+.article-content ol {
     margin: 1.5rem 0;
     padding-left: 2rem;
 }
@@ -581,50 +548,50 @@ footer {
     .container {
         padding: 0 15px;
     }
-    
+
     header {
         padding: 1.5rem 0;
         margin-bottom: 2rem;
     }
-    
+
     .header-top {
         flex-direction: row;
         align-items: flex-start;
     }
-    
+
     header h1 {
         font-size: 1.75rem;
     }
-    
+
     header h1 {
         font-size: 1.85rem;
     }
-    
+
     .posts-header {
         justify-content: center;
         margin-bottom: 1rem;
     }
-    
+
     .theme-toggle,
     .sort-toggle-btn {
         width: 38px;
         height: 38px;
     }
-    
+
     .theme-toggle svg,
     .sort-toggle-btn .sort-icon {
         width: 18px;
         height: 18px;
     }
-    
+
     .article-content {
         padding: 2rem;
     }
-    
+
     .article-content h1 {
         font-size: 2rem;
     }
-    
+
     article {
         padding: 1.5rem;
     }
@@ -676,7 +643,8 @@ footer {
     margin-bottom: 1.5rem;
 }
 
-.about-info ul, .about-info ol {
+.about-info ul,
+.about-info ol {
     margin: 1.5rem 0;
     padding-left: 2rem;
 }
@@ -727,9 +695,8 @@ footer {
         margin-top: 3rem;
         padding-top: 2rem;
     }
-    
+
     .comments-section h2 {
         font-size: 1.5rem;
     }
 }
-
