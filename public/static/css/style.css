@@ -47,6 +47,57 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* 阅读进度指示器 - 圆形 */
+.reading-progress {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    z-index: 9999;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.reading-progress.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.reading-progress svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.reading-progress .progress-bg {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-width: 4;
+}
+
+.reading-progress .progress-bar {
+    fill: none;
+    stroke: var(--link-color);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 126;
+    stroke-dashoffset: 126;
+    transition: stroke-dashoffset 0.1s ease-out;
+}
+
+.reading-progress .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
 /* 容器 */
 .container {
     max-width: 1200px;
@@ -293,6 +344,11 @@ article time {
 article p {
     color: var(--text-secondary);
     line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /* 单篇文章样式 */
@@ -544,12 +600,49 @@ a:hover {
 /* 页脚样式 */
 footer {
     text-align: center;
-    padding: 2rem 0;
+    padding: 2.5rem 0;
     color: var(--text-secondary);
     font-size: 0.9rem;
     border-top: 1px solid var(--border-color);
     margin-top: 3rem;
     transition: all 0.3s ease;
+    background: var(--bg-secondary);
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.social-links a {
+    color: var(--text-secondary);
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links a:hover {
+    color: var(--link-color);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.social-links svg {
+    width: 22px;
+    height: 22px;
 }
 
 /* 响应式设计 */
