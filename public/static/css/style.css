@@ -11,7 +11,7 @@
     --bg-primary: #fafafa;
     --bg-secondary: #ffffff;
     --bg-code: #f6f8fa;
-    --text-primary: #2c3e50;
+    --text-primary: #000000;
     --text-secondary: #718096;
     --text-tertiary: #64748b;
     --border-color: #e1e8ed;
@@ -350,6 +350,11 @@ article p {
 
 .article-content p {
     margin-bottom: 1.5rem;
+    color: #4b5563;
+}
+
+[data-theme="dark"] .article-content p {
+    color: #b0b8c4;
 }
 
 .article-content ul,
