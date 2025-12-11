@@ -423,6 +423,17 @@ article p {
     margin-bottom: 0.5rem;
 }
 
+/* 加粗文字样式 */
+.article-content strong {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .article-content strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
 .article-content blockquote {
     border-left: 4px solid var(--link-color);
     padding-left: 1.5rem;
