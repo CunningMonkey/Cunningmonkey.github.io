@@ -234,12 +234,25 @@ func generateListPage(config Config, posts []Post) {
 	}
 	defer f.Close()
 
+	// 收集文章年份，按降序排序并传递到模板以在服务端生成年份选项
+	yearSet := make(map[int]struct{})
+	for _, p := range posts {
+		yearSet[p.Date.Year()] = struct{}{}
+	}
+	years := make([]int, 0, len(yearSet))
+	for y := range yearSet {
+		years = append(years, y)
+	}
+	sort.Sort(sort.Reverse(sort.IntSlice(years)))
+
 	err = tmpl.Execute(f, struct {
 		Config
 		Posts []Post
+		Years []int
 	}{
 		Config: config,
 		Posts:  posts,
+		Years:  years,
 	})
 	if err != nil {
 		log.Fatal(err)

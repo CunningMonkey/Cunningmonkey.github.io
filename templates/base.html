@@ -82,10 +82,11 @@
             gtag('config', 'G-NETWDT6NYW', { 'anonymize_ip': true });
         }
 
-        // 页面加载时，如果之前已同意则直接加载
-        if (localStorage.getItem('analytics_consent') === 'yes') {
-            loadGtag();
-        }
+        // 默认启用统计：设置同意并加载 gtag
+        try {
+            localStorage.setItem('analytics_consent', 'yes');
+        } catch (e) { }
+        loadGtag();
     </script>
 </head>
 
@@ -148,14 +149,7 @@
         </div>
     </div>
 
-    <!-- 隐私同意横幅（仅当尚未设置时显示） -->
-    <div id="consent-banner" class="consent-banner" style="display:none;" role="dialog" aria-live="polite">
-        <p>我们使用 Google Analytics 来统计访问量。点击“同意”以启用统计；你也可以选择拒绝。</p>
-        <div class="consent-actions">
-            <button id="consent-decline">拒绝</button>
-            <button id="consent-accept" class="primary">同意</button>
-        </div>
-    </div>
+    <!-- 隐私同意横幅已移除：默认启用统计 -->
 
     <footer>
         <div class="container">
@@ -388,33 +382,7 @@
                 pre.appendChild(copyBtn);
             });
         });
-        // 同意横幅逻辑
-        (function () {
-            var banner = document.getElementById('consent-banner');
-            var accept = document.getElementById('consent-accept');
-            var decline = document.getElementById('consent-decline');
-
-            function hideBanner() { if (banner) banner.style.display = 'none'; }
-
-            // 如果已明确同意或拒绝，则不显示横幅
-            var consent = localStorage.getItem('analytics_consent');
-            if (!consent) { if (banner) banner.style.display = 'flex'; }
-
-            if (accept) {
-                accept.addEventListener('click', function () {
-                    localStorage.setItem('analytics_consent', 'yes');
-                    try { loadGtag(); } catch (e) { }
-                    hideBanner();
-                });
-            }
-
-            if (decline) {
-                decline.addEventListener('click', function () {
-                    localStorage.setItem('analytics_consent', 'no');
-                    hideBanner();
-                });
-            }
-        })();
+        // 隐私横幅逻辑已移除；统计默认启用
     </script>
 </body>
 

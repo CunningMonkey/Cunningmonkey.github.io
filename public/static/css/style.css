@@ -22,6 +22,14 @@
     --shadow-hover: rgba(0, 0, 0, 0.15);
 }
 
+/* 避免当页面内容高度变化时出现/隐藏垂直滚动条导致的横向抖动 */
+html {
+    overflow-y: scroll;
+    /* 始终保留垂直滚动条位置 */
+    scrollbar-gutter: stable;
+    /* 保留滚动条占位（兼容现代浏览器） */
+}
+
 /* 暗色模式 */
 [data-theme="dark"] {
     --bg-primary: #0d1117;
@@ -242,7 +250,117 @@ nav a.active:hover {
 .posts-header {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    flex-wrap: nowrap;
+    /* 防止控件在容器中换行导致位置变化 */
     margin-bottom: 1rem;
+}
+
+/* 控件容器 */
+.posts-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* 年份下拉包装器，提供自定义箭头和对齐 */
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 36px;
+    padding: 0 44px 0 16px;
+    /* 增加 right padding 以适配更大箭头 */
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    width: 140px;
+    /* 固定宽度，避免选项文本长短导致控件位置移动 */
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.select-wrapper::after {
+    display: none;
+    /* replaced by inline SVG for pixel-perfect match */
+}
+
+/* Inline SVG arrow that mirrors .sort-icon */
+.select-wrapper .select-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    /* rotate to point down */
+    pointer-events: none;
+    color: var(--text-secondary);
+    width: 16px;
+    height: 16px;
+    transition: color 0.18s ease, transform 0.12s ease;
+}
+
+/* Hover / focus visual parity with sort button (keep rotation while scaling) */
+.select-wrapper:hover .select-arrow {
+    color: var(--text-primary);
+    transform: translateY(-50%) rotate(-90deg) scale(1.05);
+}
+
+.select-wrapper:focus-within .select-arrow {
+    color: var(--link-color);
+    transform: translateY(-50%) rotate(-90deg) scale(1.08);
+}
+
+.select-wrapper select:hover {
+    background-color: var(--bg-code);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.select-wrapper select:active {
+    transform: translateY(0);
+}
+
+.select-wrapper select:focus {
+    outline: none;
+    border-color: var(--link-color);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    color: var(--text-primary);
+}
+
+/* 在小屏幕上让控件垂直排列 */
+@media (max-width: 600px) {
+    .posts-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .select-wrapper select,
+    .sort-toggle-btn {
+        width: 100%;
+    }
+}
+
+/* 无障碍隐藏文本 */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
 }
 
 /* 文章排序控件样式 */
