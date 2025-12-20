@@ -83,9 +83,10 @@
         }
 
         
-        if (localStorage.getItem('analytics_consent') === 'yes') {
-            loadGtag();
-        }
+        try {
+            localStorage.setItem('analytics_consent', 'yes');
+        } catch (e) { }
+        loadGtag();
     </script>
 </head>
 
@@ -166,13 +167,6 @@
     </div>
 
     
-    <div id="consent-banner" class="consent-banner" style="display:none;" role="dialog" aria-live="polite">
-        <p>我们使用 Google Analytics 来统计访问量。点击“同意”以启用统计；你也可以选择拒绝。</p>
-        <div class="consent-actions">
-            <button id="consent-decline">拒绝</button>
-            <button id="consent-accept" class="primary">同意</button>
-        </div>
-    </div>
 
     <footer>
         <div class="container">
@@ -406,32 +400,6 @@
             });
         });
         
-        (function () {
-            var banner = document.getElementById('consent-banner');
-            var accept = document.getElementById('consent-accept');
-            var decline = document.getElementById('consent-decline');
-
-            function hideBanner() { if (banner) banner.style.display = 'none'; }
-
-            
-            var consent = localStorage.getItem('analytics_consent');
-            if (!consent) { if (banner) banner.style.display = 'flex'; }
-
-            if (accept) {
-                accept.addEventListener('click', function () {
-                    localStorage.setItem('analytics_consent', 'yes');
-                    try { loadGtag(); } catch (e) { }
-                    hideBanner();
-                });
-            }
-
-            if (decline) {
-                decline.addEventListener('click', function () {
-                    localStorage.setItem('analytics_consent', 'no');
-                    hideBanner();
-                });
-            }
-        })();
     </script>
 </body>
 
