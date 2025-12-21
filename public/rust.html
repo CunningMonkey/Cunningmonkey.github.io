@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>哈吉飞东西🫘 - 没啥好说</title>
+    <title>哈吉飞东西🫘 - Rust学习</title>
     
     <script>
         (function () {
@@ -137,33 +137,24 @@
 
     <div class="container">
         <article class="article-content">
-            <h1>没啥好说</h1>
-            <time>2025年1月1日</time>
-            <div><h2 id="2025-12-20">2025-12-20</h2>
-<p>好想出去旅游，但又没有目的地<br />
-想休假在家躺着休息，但又感觉浪费了年假<br />
-做任何事情之前，都会先计算这件事带来的收益<br />
-我真是越来越世俗了 😣<br />
-<strong>`明天何去何从啊</strong></p>
-<h2 id="2025-12-12">2025-12-12</h2>
-<p>上午十一点开始下了大雪，雪飘到身上的时候竟然发自内心的感到了开心，真是难得:-)</p>
-<p>下午值班开会差点跟人吵起来，其实也不能怪对方，我最近脾气太差了，尤其是涉及到工作(._.)</p>
-<h2 id="2025-12-11">2025-12-11</h2>
-<p>又是值班的一周，好累好累，感觉燃尽了.....<br />
-几次熬夜都熬出濒死感了:)，不能这样下去了<br />
-<strong>好想出去玩一段时间</strong></p>
-<h2 id="2025-12-06">2025-12-06</h2>
-<p>现在是凌晨1点，准备做一些线上操作....</p>
-<p>播放了大同的《没啥好说》，听的我好想哭</p>
-<p><strong>好想能去听一次你的演唱会啊，Khalil</strong></p>
-<h2 id="2025-12-05">2025-12-05</h2>
-<p>7月份mentor转岗后，上月底技术负责人也转岗了。被值班、上线、开发压的有点喘不过气了。</p>
-<p>最近熬夜好多，身体也不太舒服，上个月去医院检查，有不正常的指标，还要再复查，本来安排的健身计划也只能暂停了:)。</p>
-<p><strong>life可真是xx的struggle啊！</strong></p>
-<h2 id="2025-11-20">2025-11-20</h2>
-<p>大同首专发布20周年，最近也在尝试练习弹唱大同的歌，但是都好难 :)</p>
-<p>总感觉大同去世这件事像是梦一样，一直以来都很欣赏这种很纯粹的人，自己也一直想成为但永远无法成为这种纯粹的人</p>
-<p>希望你真的去了另一个世界，并且能够开心</p>
+            <h1>Rust学习</h1>
+            <time>2025年12月21日</time>
+            <div><h2 id="trick">Trick</h2>
+<h3 id="heading">整形上溢/下溢</h3>
+<p>实际使用中，<code>uszie</code>容易出现下溢（0 - 1），rust提供了<code>saturating_sub</code>，能够处理各种整数类型返回边界值<br />
+<code>usize::saturating_sub</code>（以及其它整数类型的 <code>saturating_sub</code>）做的是“饱和减法”：正常计算 <code>self - rhs</code>，但如果会发生溢出/下溢则返回类型的边界值而不是 panic 或环绕。</p>
+<p>要点：</p>
+<p>签名：<code>fn saturating_sub(self, rhs: Self) -&gt; Self</code>（在所有整型上可用）。<br />
+对无符号类型（如 usize）：下溢时结果饱和为 0。例如：</p>
+<pre style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#ae81ff">5</span> <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>.saturating_sub(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> <span style="color:#66d9ef">as</span> <span style="color:#66d9ef">usize</span>.saturating_sub(<span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e">// 不会下溢 panic
+</span></span></span></code></pre><p>对有符号类型（如 i8）：若计算超出范围则饱和到 MIN 或 MAX：</p>
+<pre style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">i8</span>::<span style="color:#66d9ef">MIN</span>.saturating_sub(<span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#66d9ef">i8</span>::<span style="color:#66d9ef">MIN</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">i8</span>::<span style="color:#66d9ef">MAX</span>.saturating_sub(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#66d9ef">i8</span>::<span style="color:#66d9ef">MAX</span>
+</span></span></code></pre><p>和其它方法对比：</p>
+<p><code>checked_sub</code>：返回 Option，溢出时返回 None。<br />
+<code>wrapping_sub</code>：按模 2^N 环绕（不会 panic，但会得到环绕结果）。<br />
+<code>saturating_sub</code>：溢出时返回边界值（方便避免下溢 panic，同时保留一个有意义的最小/最大值）。</p>
 </div>
         </article>
 
