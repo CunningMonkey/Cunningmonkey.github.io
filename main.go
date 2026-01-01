@@ -20,9 +20,10 @@ import (
 )
 
 type FrontMatter struct {
-	Title   string    `yaml:"title"`
-	Date    time.Time `yaml:"date"`
-	Summary string    `yaml:"summary"`
+	Title     string    `yaml:"title"`
+	Date      time.Time `yaml:"date"`
+	Summary   string    `yaml:"summary"`
+	Published *bool     `yaml:"published"`
 }
 
 type Post struct {
@@ -127,6 +128,12 @@ func processPosts(config Config) []Post {
 		post, err := parsePost(data, path)
 		if err != nil {
 			log.Printf("parse failed %s: %v", path, err)
+			return nil
+		}
+
+		// 如果 front matter 中存在 published 并且为 false，则跳过渲染该文章
+		if post.Published != nil && !*post.Published {
+			log.Printf("skipping unpublished post: %s", path)
 			return nil
 		}
 

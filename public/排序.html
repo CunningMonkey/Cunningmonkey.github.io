@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>哈吉飞东西🫘 - 没啥好说</title>
+    <title>哈吉飞东西🫘 - 排序</title>
     
     <script>
         (function () {
@@ -151,44 +151,115 @@
 
     <div class="container">
         <article class="article-content">
-            <h1>没啥好说</h1>
-            <time>2025年1月1日</time>
-            <div><h2 id="2025-12-23">2025-12-23</h2>
-<p>今晚又要上线，感觉自己已经要和被迫熬夜这件事和解了🫢</p>
-<p>还是在尝试恢复运动，最近几天，每天会花20min左右做一些简单的运动<br />
-很奇怪的是这个月竟然解锁了引体向上，之前一个都做不了，现在已经能稳定做三个了👏</p>
-<p>每天晚上眼睛都很不舒服，应该是白天盯着屏幕看太久了，但是下班了也很难摆脱电子设备。<br />
-下班之后好像除了弹吉他和玩手机，没有别的事可做了。就算是弹吉他，也要看看屏幕上的琴谱。<br />
-谁来救救我的眼👀</p>
-<p>在考虑要不要把以前的博客的内容搬到这里，虽然也没什么有价值的东西。<br />
-可能是想回忆一下以前写的东西。</p>
-<p>明天到底会更好，还是会更差呢🤔</p>
-<h2 id="2025-12-20">2025-12-20</h2>
-<p>好想出去旅游，但又没有目的地<br />
-想休假在家躺着休息，但又感觉浪费了年假<br />
-做任何事情之前，都会先计算这件事带来的收益<br />
-我真是越来越世俗了 😣<br />
-<strong>明天何去何从啊</strong></p>
-<h2 id="2025-12-12">2025-12-12</h2>
-<p>上午十一点开始下了大雪，雪飘到身上的时候竟然发自内心的感到了开心，真是难得:-)</p>
-<p>下午值班开会差点跟人吵起来，其实也不能怪对方，我最近脾气太差了，尤其是涉及到工作(._.)</p>
-<h2 id="2025-12-11">2025-12-11</h2>
-<p>又是值班的一周，好累好累，感觉燃尽了.....<br />
-几次熬夜都熬出濒死感了:)，不能这样下去了<br />
-<strong>好想出去玩一段时间</strong></p>
-<h2 id="2025-12-06">2025-12-06</h2>
-<p>现在是凌晨1点，准备做一些线上操作....</p>
-<p>播放了大同的《没啥好说》，听的我好想哭</p>
-<p><strong>好想能去听一次你的演唱会啊，Khalil</strong></p>
-<h2 id="2025-12-05">2025-12-05</h2>
-<p>7月份mentor转岗后，上月底技术负责人也转岗了。被值班、上线、开发压的有点喘不过气了。</p>
-<p>最近熬夜好多，身体也不太舒服，上个月去医院检查，有不正常的指标，还要再复查，本来安排的健身计划也只能暂停了:)。</p>
-<p><strong>life可真是xx的struggle啊！</strong></p>
-<h2 id="2025-11-20">2025-11-20</h2>
-<p>大同首专发布20周年，最近也在尝试练习弹唱大同的歌，但是都好难 :)</p>
-<p>总感觉大同去世这件事像是梦一样，一直以来都很欣赏这种很纯粹的人，自己也一直想成为但永远无法成为这种纯粹的人</p>
-<p>希望你真的去了另一个世界，并且能够开心</p>
-</div>
+            <h1>排序</h1>
+            <time>2025年12月27日</time>
+            <div><h2 id="heading">排序</h2>
+<h3 id="heading-1">快速排序</h3>
+<h4 id="heading-2">流程</h4>
+<p>1.选择一个<code>pivot</code><br />
+2.根据<code>pivot</code>将数组分为左右两部分<br />
+3.以递归的方式，对左右两部分重复上述过程</p>
+<h4 id="heading-3">时间复杂度</h4>
+<ol>
+<li>最好情况: $O(nlogn)$。每一次都能均分左右两边</li>
+<li>最差情况: $O(n^2)$。已经拍好序的数组，每次都是左边一个元素，右边是n-1个元素</li>
+<li>平均情况: $O(nlogn)$<br />
+粗略计算：</li>
+</ol>
+<pre><code>Level 0:      n
+Level 1:    n/2  n/2
+Level 2:  n/4 n/4 n/4 n/4
+</code></pre>
+<p>总共分成$log(n)$层，每一层都是n个元素的遍历，时间复杂度为$nlog(n)$</p>
+<h4 id="1">实现1</h4>
+<p>最普通的实现，每次选择最左侧元素作为pivot</p>
+<pre style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quickSort</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;=</span> right) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> pivotIndex <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> rand() <span style="color:#f92672">%</span> (right <span style="color:#f92672">-</span> left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    swap(nums[left], nums[pivotIndex]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> pivot <span style="color:#f92672">=</span> nums[left];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> left;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> right; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">&lt;</span> pivot) {
+</span></span><span style="display:flex;"><span>            l<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            swap(nums[l], nums[i]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    swap(nums[left], nums[l]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    quickSort(nums, left, l <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    quickSort(nums, l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, right);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><h4 id="2-dutch-national-flagdnf">实现2: Dutch National Flag（DNF）三路快排</h4>
+<p>针对数组中可能存在大量重复元素，使用三路划分法优化：</p>
+<pre style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quickSort</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> left, <span style="color:#66d9ef">int</span> right) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;=</span> right) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 随机选择 pivot，避免最坏情况 O(n^2)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> pivotIndex <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> rand() <span style="color:#f92672">%</span> (right <span style="color:#f92672">-</span> left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    swap(nums[left], nums[pivotIndex]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> pivot <span style="color:#f92672">=</span> nums[left];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> lt <span style="color:#f92672">=</span> left;      <span style="color:#75715e">// &lt; pivot 的右边界
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> i  <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// 当前处理元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> gt <span style="color:#f92672">=</span> right;     <span style="color:#75715e">// &gt; pivot 的左边界
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 遍历未处理区间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;=</span> gt) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">&lt;</span> pivot) {
+</span></span><span style="display:flex;"><span>            swap(nums[i], nums[lt]);
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            lt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">&gt;</span> pivot) {
+</span></span><span style="display:flex;"><span>            swap(nums[i], nums[gt]);
+</span></span><span style="display:flex;"><span>            gt<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// i 不加，因为换过来的元素还没处理
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 递归处理左右两边，中间区 == pivot 已经排好
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    quickSort(nums, left, lt <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    quickSort(nums, gt <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, right);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre><p><strong>核心逻辑</strong><br />
+利用区间不变式：</p>
+<ul>
+<li>[left, lt-1] &lt; pivot</li>
+<li>[lt, i-1] == pivot</li>
+<li>[i, gt] 未处理</li>
+<li>[gt+1, right] &gt; pivot</li>
+</ul>
+<p>每次循环根据元素大小更新区间，保证已处理区间始终正确<br />
+递归只处理 &lt; pivot 和 &gt; pivot 两边，避免重复处理 == pivot 区<br />
+随机 pivot 保证平均时间复杂度稳定在 $O(n \log n)$</p>
+<p>leetcode：75 颜色分类，将数组中的0，1，2按序排列可以直接使用这种三指针的方式，进行排列，区间不变式稍微有点变化：</p>
+<ul>
+<li>(left, lt] == 0</li>
+<li>(lt, i) == 1</li>
+<li>[i, rt] 未处理</li>
+<li>(rt, right] == 2</li>
+</ul>
+<pre style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sortColors</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> lt <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> rt <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;=</span> rt) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        swap(nums[<span style="color:#f92672">++</span>lt], nums[i<span style="color:#f92672">++</span>]);
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        swap(nums[i], nums[rt<span style="color:#f92672">--</span>]);
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div>
         </article>
 
         

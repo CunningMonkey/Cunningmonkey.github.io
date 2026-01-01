@@ -25,6 +25,7 @@ cat <<EOF > "$FILEPATH"
 title: "$TITLE"
 date: $DATE
 summary: "Summary of your new post."
+published: true
 ---
 
 ## $TITLE
