@@ -92,11 +92,11 @@
     <script>
         window.MathJax = {
             tex: {
-                inlineMath: [['$','$'], ['\\(','\\)']],
-                displayMath: [['$$','$$']]
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']]
             },
             options: {
-                skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
             },
             svg: { fontCache: 'global' }
         };
@@ -153,10 +153,9 @@
         <article class="article-content">
             <h1>贪心</h1>
             <time>2025年12月31日</time>
-            <div><h1 id="heading">贪心算法刷题分类总结</h1>
-<p>本文目标是<strong>建立稳定的贪心刷题认知框架，避免重复刷题</strong>，并通过一段极具代表性的代码（LeetCode 881 救生艇）来加深对贪心思想的理解。</p>
+            <div><p>本文目标是<strong>建立稳定的贪心刷题认知框架，避免重复刷题</strong>，并通过一段极具代表性的代码（LeetCode 881 救生艇）来加深对贪心思想的理解。</p>
 <hr />
-<h2 id="heading-1">一、什么是贪心算法（面向刷题的定义）</h2>
+<h2 id="heading">一、什么是贪心算法（面向刷题的定义）</h2>
 <blockquote>
 <p>贪心算法：在每一步选择中，都做出<strong>当前看起来最优</strong>的决策，并且该决策<strong>不会影响最终全局最优解</strong>。</p>
 </blockquote>
@@ -166,96 +165,96 @@
 <li><strong>最优子结构</strong>：问题在做出一次选择后，剩余部分仍是同类型的最优问题</li>
 </ol>
 <hr />
-<h2 id="heading-2">二、贪心题目的本质分类（避免重复刷题）</h2>
+<h2 id="heading-1">二、贪心题目的本质分类（避免重复刷题）</h2>
 <p>下面的分类是按<strong>决策本质</strong>划分，而不是题目表象。同一类题目，思路高度一致，只需刷 1–2 道即可。</p>
 <hr />
 <h2 id="1-matching-greedy">1️⃣ 资源–需求匹配型（Matching Greedy）</h2>
-<h3 id="heading-3">核心问题</h3>
+<h3 id="heading-2">核心问题</h3>
 <blockquote>
 <p>用有限资源，满足尽可能多的需求</p>
 </blockquote>
-<h3 id="heading-4">统一贪心策略</h3>
+<h3 id="heading-3">统一贪心策略</h3>
 <ul>
 <li>对资源和需求排序</li>
 <li><strong>最小资源 → 最小需求</strong>（或最大对最大）</li>
 <li>保留“适配能力强”的资源给后面</li>
 </ul>
-<h3 id="heading-5">典型证明</h3>
+<h3 id="heading-4">典型证明</h3>
 <ul>
 <li>交换论证：如果最优解没有这么配，可以交换而不变差</li>
 </ul>
-<h3 id="heading-6">代表题</h3>
+<h3 id="heading-5">代表题</h3>
 <ul>
-<li><a href="https://leetcode.com/problems/assign-cookies/">LeetCode 455 - 分配饼干</a>（基础模板）</li>
-<li><a href="https://leetcode.com/problems/boats-to-save-people/">LeetCode 881 - 救生艇</a>（双指针升级版）</li>
-<li><a href="https://leetcode.com/problems/most-profit-assigning-work/">LeetCode 826 - 安排工作以达到最大收益</a></li>
+<li><a href="https://leetcode.cn/problems/assign-cookies/">LeetCode 455 - 分配饼干</a>（基础模板）</li>
+<li><a href="https://leetcode.cn/problems/boats-to-save-people/">LeetCode 881 - 救生艇</a>（双指针升级版）</li>
+<li><a href="https://leetcode.cn/problems/most-profit-assigning-work/">LeetCode 826 - 安排工作以达到最大收益</a></li>
 </ul>
 <blockquote>
 <p>刷完这一类后，几乎所有“分配 / 匹配”问题都可以直接套模板</p>
 </blockquote>
 <hr />
 <h2 id="2---interval-greedy">2️⃣ 区间调度 / 覆盖型（Interval Greedy）</h2>
-<h3 id="heading-7">核心问题</h3>
+<h3 id="heading-6">核心问题</h3>
 <blockquote>
 <p>在区间约束下，选最多 / 删最少 / 覆盖全部</p>
 </blockquote>
-<h3 id="heading-8">统一贪心策略</h3>
+<h3 id="heading-7">统一贪心策略</h3>
 <ul>
 <li>按 <strong>右端点排序</strong></li>
 <li>每次选择“结束最早”的区间</li>
 </ul>
-<h3 id="heading-9">代表题</h3>
+<h3 id="heading-8">代表题</h3>
 <ul>
-<li><a href="https://leetcode.com/problems/non-overlapping-intervals/">LeetCode 435 - 无重叠区间</a></li>
-<li><a href="https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/">LeetCode 452 - 用最少数量的箭引爆气球</a></li>
-<li><a href="https://leetcode.com/problems/video-stitching/">LeetCode 1024 - 视频拼接</a></li>
+<li><a href="https://leetcode.cn/problems/non-overlapping-intervals/">LeetCode 435 - 无重叠区间</a></li>
+<li><a href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">LeetCode 452 - 用最少数量的箭引爆气球</a></li>
+<li><a href="https://leetcode.cn/problems/video-stitching/">LeetCode 1024 - 视频拼接</a></li>
 </ul>
 <hr />
 <h2 id="3---">3️⃣ 排序 + 线性扫描型</h2>
-<h3 id="heading-10">核心问题</h3>
+<h3 id="heading-9">核心问题</h3>
 <blockquote>
 <p>决策顺序一旦确定，线性扫描即可完成最优解</p>
 </blockquote>
-<h3 id="heading-11">代表题</h3>
+<h3 id="heading-10">代表题</h3>
 <ul>
-<li><a href="https://leetcode.com/problems/queue-reconstruction-by-height/">LeetCode 406 - 根据身高重建队列</a></li>
-<li><a href="https://leetcode.com/problems/candy/">LeetCode 135 - 分发糖果</a></li>
-<li><a href="https://leetcode.com/problems/task-scheduler/">LeetCode 621 - 任务调度器</a></li>
+<li><a href="https://leetcode.cn/problems/queue-reconstruction-by-height/">LeetCode 406 - 根据身高重建队列</a></li>
+<li><a href="https://leetcode.cn/problems/candy/">LeetCode 135 - 分发糖果</a></li>
+<li><a href="https://leetcode.cn/problems/task-scheduler/">LeetCode 621 - 任务调度器</a></li>
 </ul>
 <hr />
 <h2 id="4---">4️⃣ 堆 + 贪心（动态最优选择）</h2>
-<h3 id="heading-12">核心问题</h3>
+<h3 id="heading-11">核心问题</h3>
 <blockquote>
 <p>每一步都要在动态变化的候选集中选最优</p>
 </blockquote>
-<h3 id="heading-13">代表题</h3>
+<h3 id="heading-12">代表题</h3>
 <ul>
-<li><a href="https://leetcode.com/problems/meeting-rooms-ii/">LeetCode 253 - 会议室 II</a></li>
-<li><a href="https://leetcode.com/problems/ipo/">LeetCode 502 - IPO</a></li>
-<li><a href="https://leetcode.com/problems/minimum-cost-to-hire-k-workers/">LeetCode 857 - 雇佣 K 名工人的最低成本</a></li>
+<li><a href="https://leetcode.cn/problems/meeting-rooms-ii/">LeetCode 253 - 会议室 II</a></li>
+<li><a href="https://leetcode.cn/problems/ipo/">LeetCode 502 - IPO</a></li>
+<li><a href="https://leetcode.cn/problems/minimum-cost-to-hire-k-workers/">LeetCode 857 - 雇佣 K 名工人的最低成本</a></li>
 </ul>
 <hr />
 <h2 id="5---">5️⃣ 字符串 / 数组构造型（单调结构贪心）</h2>
-<h3 id="heading-14">核心问题</h3>
+<h3 id="heading-13">核心问题</h3>
 <blockquote>
 <p>在满足约束下，构造字典序最优的结果</p>
 </blockquote>
-<h3 id="heading-15">代表题</h3>
+<h3 id="heading-14">代表题</h3>
 <ul>
-<li><a href="https://leetcode.com/problems/remove-k-digits/">LeetCode 402 - 移掉 K 位数字</a></li>
-<li><a href="https://leetcode.com/problems/remove-duplicate-letters/">LeetCode 316 - 去除重复字母</a></li>
-<li><a href="https://leetcode.com/problems/smallest-subsequence-of-distinct-characters/">LeetCode 1081 - 去除重复字母 II（Smallest Subsequence）</a></li>
+<li><a href="https://leetcode.cn/problems/remove-k-digits/">LeetCode 402 - 移掉 K 位数字</a></li>
+<li><a href="https://leetcode.cn/problems/remove-duplicate-letters/">LeetCode 316 - 去除重复字母</a></li>
+<li><a href="https://leetcode.cn/problems/smallest-subsequence-of-distinct-characters/">LeetCode 1081 - 去除重复字母 II（Smallest Subsequence）</a></li>
 </ul>
 <hr />
 <h2 id="leetcode-881---">三、LeetCode 881 救生艇 —— 贪心思想的极简实现</h2>
-<h3 id="heading-16">题目摘要</h3>
+<h3 id="heading-15">题目摘要</h3>
 <ul>
 <li>每个人有体重 <code>people[i]</code></li>
 <li>每条船最多载 2 人，总重量不超过 <code>limit</code></li>
 <li>求最少船数</li>
 </ul>
 <hr />
-<h3 id="heading-17">核心贪心思想</h3>
+<h3 id="heading-16">核心贪心思想</h3>
 <blockquote>
 <p><strong>最重的人一定要上船</strong>；<br />
 如果他能和最轻的人同船，这是最优的；<br />
@@ -263,7 +262,7 @@
 </blockquote>
 <p>这是典型的 <strong>资源–需求匹配型贪心</strong>。</p>
 <hr />
-<h3 id="heading-18">极其优雅的实现</h3>
+<h3 id="heading-17">极其优雅的实现</h3>
 <pre style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">numRescueBoats</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>people, <span style="color:#66d9ef">int</span> limit) {
 </span></span><span style="display:flex;"><span>    sort(people.begin(), people.end());
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
@@ -280,7 +279,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> boats;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre><hr />
-<h3 id="heading-19">为什么这段代码是“对的”</h3>
+<h3 id="heading-18">为什么这段代码是“对的”</h3>
 <h4 id="1-">1️⃣ 为什么一定先考虑最重的人？</h4>
 <ul>
 <li>最重的人是<strong>最难被安置的</strong></li>
@@ -303,28 +302,16 @@
 </ul>
 <p>因此，贪心选择不影响全局最优。</p>
 <hr />
-<h2 id="heading-20">四、从这道题抽象出的通用模板</h2>
+<h2 id="heading-19">四、从这道题抽象出的通用模板</h2>
 <pre style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span>1. 排序
 </span></span><span style="display:flex;"><span>2. 最难处理的对象必须优先决策
 </span></span><span style="display:flex;"><span>3. 尝试用最小代价与其匹配
 </span></span><span style="display:flex;"><span>4. 无论成功与否，都能确定一次不可回退的决策
-</span></span></code></pre><p>这是你在刷<strong>大量贪心题</strong>时可以反复复用的决策框架。</p>
-<hr />
-<h2 id="heading-21">五、刷题建议（防止重复）</h2>
-<ul>
-<li>分饼干 ⇔ 救生艇（同一类，只刷一个即可）</li>
-<li>无重叠区间 ⇔ 射气球</li>
-<li>移掉 K 位数字 ⇔ 去重字母</li>
-</ul>
-<blockquote>
-<p><strong>识别“贪心等价类”，比刷题数量更重要</strong></p>
-</blockquote>
-<hr />
-<h2 id="heading-22">六、总结一句话</h2>
+</span></span></code></pre><hr />
+<h2 id="heading-20">六、总结一句话</h2>
 <blockquote>
 <p>贪心不是“拍脑袋”，而是<strong>在不可回退的前提下，做出不会后悔的局部最优选择</strong>。</p>
 </blockquote>
-<p>LeetCode 881 正是这一思想的高度凝练实现。</p>
 </div>
         </article>
 
@@ -354,7 +341,7 @@
                     </svg>
                 </a>
             </div>
-            <p>© 2025 哈吉飞东西🫘</p>
+            <p>© 2026 哈吉飞东西🫘</p>
         </div>
     </footer>
 
