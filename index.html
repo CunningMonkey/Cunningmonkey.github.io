@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈吉飞东西🫘</title>
+    
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div>
+                    <h1><a href="index.html">哈吉飞东西🫘</a></h1>
+                    <p>怀疑我的怀疑，哪一个是悖理</p>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="切换主题">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav>
+                <a href="index.html" class="active">首页</a>
+                <a href="about.html">关于我</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="posts-header">
+            <div class="posts-controls">
+                <div class="select-wrapper">
+                    <label for="year-filter" class="visually-hidden">按年份筛选</label>
+                    <select id="year-filter" aria-label="按年份筛选">
+                        <option value="all">全部年份</option>
+                        
+                        <option value="2025">2025</option>
+                        
+                        <option value="2024">2024</option>
+                        
+                        <option value="2023">2023</option>
+                        
+                    </select>
+                    
+                    <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </div>
+
+                <button id="sort-toggle" class="sort-toggle-btn" data-order="desc" aria-label="切换排序方式" title="最新在前">
+                    <span class="sort-text">最新文章</span>
+                    <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <section id="posts-container">
+            
+            <article data-date=" 2025-12-21">
+                <h2><a href="rust.html">Rust学习</a></h2>
+                <time>2025年12月21日</time>
+                <p>这里有一些Rust.</p>
+            </article>
+            
+            <article data-date=" 2025-01-01">
+                <h2><a href="2025.html">没啥好说2025</a></h2>
+                <time>2025年1月1日</time>
+                <p>想到什么写什么
+看到什么写什么
+听到什么写什么</p>
+            </article>
+            
+            <article data-date=" 2025-01-01">
+                <h2><a href="2026.html">没啥好说2026</a></h2>
+                <time>2025年1月1日</time>
+                <p>想到什么写什么
+看到什么写什么
+听到什么写什么</p>
+            </article>
+            
+            <article data-date=" 2024-01-15">
+                <h2><a href="post4.html">hhhhhh</a></h2>
+                <time>2024年1月15日</time>
+                <p>学习如何向你的静态博客添加新文章并自动部署</p>
+            </article>
+            
+            <article data-date=" 2024-01-15">
+                <h2><a href="post3.html">如何添加新文章到博客</a></h2>
+                <time>2024年1月15日</time>
+                <p>学习如何向你的静态博客添加新文章并自动部署</p>
+            </article>
+            
+            <article data-date=" 2023-10-01">
+                <h2><a href="post1.html">我的第一篇文章</a></h2>
+                <time>2023年10月1日</time>
+                <p>这是文章的摘要</p>
+            </article>
+            
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/CunningMonkey" target="_blank" rel="noopener noreferrer" title="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+                <a href="mailto:evipsheep@163.com" title="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+            </div>
+            <p>© 2026 哈吉飞东西🫘</p>
+        </div>
+    </footer>
+
+    <script>
+        
+        (function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+
+            
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+
+            
+            themeToggle.addEventListener('click', function () {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        })();
+
+        
+        (function () {
+            const postsContainer = document.getElementById('posts-container');
+            const sortToggleBtn = document.getElementById('sort-toggle');
+
+            
+            let currentOrder = localStorage.getItem('postSortOrder') || 'desc';
+
+            
+            function updateButtonState(order) {
+                sortToggleBtn.setAttribute('data-order', order);
+                const sortText = sortToggleBtn.querySelector('.sort-text');
+
+                if (order === 'desc') {
+                    sortToggleBtn.setAttribute('title', '最新在前 - 点击切换');
+                    sortToggleBtn.classList.remove('asc');
+                    sortText.textContent = '最新文章';
+                } else {
+                    sortToggleBtn.setAttribute('title', '最旧在前 - 点击切换');
+                    sortToggleBtn.classList.add('asc');
+                    sortText.textContent = '最早文章';
+                }
+            }
+
+            
+            function sortPosts(order) {
+                const articles = Array.from(postsContainer.querySelectorAll('article'));
+
+                articles.sort(function (a, b) {
+                    const dateA = new Date(a.getAttribute('data-date'));
+                    const dateB = new Date(b.getAttribute('data-date'));
+
+                    if (order === 'desc') {
+                        return dateB - dateA; 
+                    } else {
+                        return dateA - dateB; 
+                    }
+                });
+
+                
+                postsContainer.innerHTML = '';
+
+                
+                articles.forEach(function (article) {
+                    postsContainer.appendChild(article);
+                });
+
+                
+                if (window.applyYearFilter) {
+                    window.applyYearFilter(document.getElementById('year-filter')?.value || 'all');
+                }
+            }
+
+            
+            updateButtonState(currentOrder);
+            if (currentOrder === 'asc') {
+                sortPosts('asc');
+            }
+
+            
+            sortToggleBtn.addEventListener('click', function () {
+                
+                currentOrder = currentOrder === 'desc' ? 'asc' : 'desc';
+
+                
+                updateButtonState(currentOrder);
+
+                
+                sortPosts(currentOrder);
+
+                
+                localStorage.setItem('postSortOrder', currentOrder);
+            });
+        })();
+
+        
+        (function () {
+            const postsContainer = document.getElementById('posts-container');
+            const yearSelect = document.getElementById('year-filter');
+
+            if (!postsContainer || !yearSelect) return;
+
+            
+            window.applyYearFilter = function (selected) {
+                const value = selected || yearSelect.value || 'all';
+                const articles = Array.from(postsContainer.querySelectorAll('article'));
+
+                articles.forEach(article => {
+                    const d = new Date(article.getAttribute('data-date'));
+                    const y = isNaN(d.getFullYear()) ? '' : String(d.getFullYear());
+
+                    if (value === 'all' || y === value) {
+                        article.style.display = '';
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+            };
+
+            
+            const saved = localStorage.getItem('postYearFilter');
+            if (saved && Array.from(yearSelect.options).some(o => o.value === saved)) {
+                yearSelect.value = saved;
+            }
+            window.applyYearFilter(yearSelect.value || saved || 'all');
+
+            yearSelect.addEventListener('change', function () {
+                const v = yearSelect.value;
+                window.applyYearFilter(v);
+                localStorage.setItem('postYearFilter', v);
+            });
+        })();
+    </script>
+</body>
+
+</html>
